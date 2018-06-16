@@ -98,7 +98,11 @@ class League
         return $data;
     }
 
-    public function setData($jsonData)
+    /**
+     * @param $jsonData
+     * @return League
+     */
+    public function setData(array $jsonData): League
     {
         $this->setName($jsonData['name']);
 

@@ -33,3 +33,7 @@ services:
     AppBundle\Manager\LeagueManager:
         class: AppBundle\Manager\LeagueManager
         arguments: ['@doctrine.orm.entity_manager']
+
+    AppBundle\Manager\TeamManager:
+        class: AppBundle\Manager\TeamManager
+        arguments: ['@doctrine.orm.entity_manager']

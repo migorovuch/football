@@ -24,6 +24,7 @@ class LeagueController extends Controller
      */
     public function __construct(LeagueManager $leagueManager)
     {
+        //TODO: чого воно тут є?
         $this->leagueManager = $leagueManager;
     }
 
@@ -87,6 +88,7 @@ class LeagueController extends Controller
      */
     public function updateLeagueAction(Request $request, int $id): JsonResponse
     {
+        //TODO: чого іd перед Request?
         $data = json_decode($request->getContent(), true);
 
         /** @var League $league */
@@ -105,7 +107,7 @@ class LeagueController extends Controller
      * @param int $id
      * @return JsonResponse
      */
-    public function delteLeagueAction(int $id): JsonResponse
+    public function deleteLeagueAction(int $id): JsonResponse
     {
         /** @var League $league */
         $this->leagueManager->delete($id);
