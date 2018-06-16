@@ -42,7 +42,7 @@ class Team
     /**
      * @var League
      * @ORM\ManyToOne(targetEntity="League", inversedBy="teams")
-     * @ORM\JoinColumn(name="id_league", referencedColumnName="id")
+     * @ORM\JoinColumn(name="id_league", referencedColumnName="id", onDelete="CASCADE")
      */
     private $league;
 

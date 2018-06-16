@@ -24,12 +24,11 @@ class TeamController extends Controller
      */
     public function __construct(TeamManager $teamManager)
     {
-        //TODO: чого воно тут є?
         $this->teamManager = $teamManager;
     }
 
     /**
-     * @Route("/{id}/team", name="show_team")
+     * @Route("/teams/{id}", name="show_team")
      * @Method("GET")
      *
      * @param int $id
@@ -60,7 +59,7 @@ class TeamController extends Controller
     }
 
     /**
-     * @Route("/team", name="create_team")
+     * @Route("/teams", name="create_team")
      * @Method("POST")
      *
      * @param Request $request
@@ -78,16 +77,15 @@ class TeamController extends Controller
     }
 
     /**
-     * @Route("/{id}/team", name="update_team")
+     * @Route("/teams/{id}", name="update_team")
      * @Method("PUT")
      *
      * @param Request $request
      * @param int $id
      * @return JsonResponse
      */
-    public function updateTeamAction(Request $request, int $id): JsonResponse
+    public function updateTeamAction(int $id, Request $request): JsonResponse
     {
-        //TODO: чого іd перед Request?
         $data = json_decode($request->getContent(), true);
         /** @var Team $team */
         $team = $this->teamManager->find($id);
@@ -98,7 +96,7 @@ class TeamController extends Controller
     }
 
     /**
-     * @Route("/{id}/team", name="delete_team")
+     * @Route("/teams/{id}", name="delete_team")
      * @Method("DELETE")
      *
      * @param int $id

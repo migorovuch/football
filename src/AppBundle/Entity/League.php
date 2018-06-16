@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -73,9 +74,9 @@ class League
     }
 
     /**
-     * @return ArrayCollection
+     * @return PersistentCollection
      */
-    public function getTeams()
+    public function getTeams(): PersistentCollection
     {
         return $this->teams;
     }

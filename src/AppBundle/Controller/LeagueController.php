@@ -24,12 +24,11 @@ class LeagueController extends Controller
      */
     public function __construct(LeagueManager $leagueManager)
     {
-        //TODO: чого воно тут є?
         $this->leagueManager = $leagueManager;
     }
 
     /**
-     * @Route("/{id}/league", name="show_league")
+     * @Route("/leagues/{id}", name="show_league")
      * @Method("GET")
      *
      * @param int $id
@@ -60,7 +59,7 @@ class LeagueController extends Controller
     }
 
     /**
-     * @Route("/league", name="create_league")
+     * @Route("/leagues", name="create_league")
      * @Method("POST")
      *
      * @param Request $request
@@ -79,16 +78,15 @@ class LeagueController extends Controller
     }
 
     /**
-     * @Route("/{id}/league", name="update_league")
+     * @Route("/leagues/{id}", name="update_league")
      * @Method("PUT")
      *
      * @param Request $request
      * @param int $id
      * @return JsonResponse
      */
-    public function updateLeagueAction(Request $request, int $id): JsonResponse
+    public function updateLeagueAction(int $id, Request $request): JsonResponse
     {
-        //TODO: чого іd перед Request?
         $data = json_decode($request->getContent(), true);
 
         /** @var League $league */
@@ -101,7 +99,7 @@ class LeagueController extends Controller
     }
 
     /**
-     * @Route("/{id}/league", name="delete_league")
+     * @Route("/leagues/{id}", name="delete_league")
      * @Method("DELETE")
      *
      * @param int $id
