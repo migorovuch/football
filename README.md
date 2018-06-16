@@ -1,77 +1,113 @@
-Symfony Standard Edition
-========================
-
-**WARNING**: This distribution does not support Symfony 4. See the
-[Installing & Setting up the Symfony Framework][15] page to find a replacement
-that fits you best.
-
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
-
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
-
-What's inside?
---------------
-
-The Symfony Standard Edition is configured with the following defaults:
-
-  * An AppBundle you can use to start coding;
-
-  * Twig as the only configured template engine;
-
-  * Doctrine ORM/DBAL;
-
-  * Swiftmailer;
-
-  * Annotations enabled for everything.
-
-It comes pre-configured with the following bundles:
-
-  * **FrameworkBundle** - The core Symfony framework bundle
-
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev env) - Adds code generation
-    capabilities
-
-  * [**WebServerBundle**][14] (in dev env) - Adds commands for running applications
-    using the PHP built-in web server
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.4/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.4/doctrine.html
-[8]:  https://symfony.com/doc/3.4/templating.html
-[9]:  https://symfony.com/doc/3.4/security.html
-[10]: https://symfony.com/doc/3.4/email.html
-[11]: https://symfony.com/doc/3.4/logging.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
-[14]: https://symfony.com/doc/current/setup/built_in_web_server.html
-[15]: https://symfony.com/doc/current/setup.html
+1.  Use composer install for instalation project
+2. execute mkdir -p app/config/jwt
+    openssl genrsa -out config/jwt/private.pem -aes256 4096
+  openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
+3. call 
+    ```
+    POST /api/login_check HTTP/1.1
+    Host: football
+    Content-Type: application/json
+    
+    {
+        "username": "admin",
+        "password": "admin"
+    }
+    ```
+4. result 
+    ```
+    {
+        "token": "eyJhbGciOiJSUzI1NiJ9.eyJyb2xlcyI6W10sInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE1MjkxNTU5NzEsImV4cCI6MTUyOTE1OTU3MX0.DBhDcpHbivDCe2ZZvZbD_0B15je9vyJxvlf9VQVzUV4DgiZgDIUbWuWGRt8lX07tRYxYc7QhQC3EgGzHtwrd5zAQ3kPTpNF6jS3ZAgQMJsN0uhuSQNlo3N4PBNqtXYTOpdyIlJirwvacJTQwIHvGSi6oAXHALrscT6b1fkNW0x6hqbVnR8rMHJlmovUhlbzR3FYCsJJxwnB1f7yYMM9uRWCw8ndH5aOw3J-wMuhMOxFeG4v-cf4OA_kslcXZeTQjbPO-0IdGgKFAGa6FNIFyI4lUZTO4zfmeDdhRAvJSmzPaM2epjtpi9RzBYWxX9KpU0MVzOZu5vwOz1paejALlAvKko1-2yZnROhLWgCoqD1PoQpff4mr8W-DtwiFZQuIZdAA7fy9vJtxt352Jivn4tzHgvyiNhKUcR4oCT7lmXxdMx2rQRWIVVNZg5c9K48jTtAh7_PHt4LeHLkskUfuz7MWVApgJQNH-GjiYoq36OfgjLyFj3dirCUbEacpbESeuM-_MylznDqWEvv9vyF-f7QP0MCMBnMMekjglOxBytmgK8gPKRW9o__kHreBqONz_OKOZ511Lv8fb3W76d88wSlIglVTMREaYU6ZkJ_pPJHiJfkyn_jvUJyVNr6OgNRcFBDFSOGZclgGbbEaPZsjiE936eNIMwSZ4ex4avKLWDag"
+    }
+    ```
+## Leagues ##
+1. create League
+    ```
+    POST /api/leagues HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    
+    {
+        "name": "league"
+    }
+    ```
+2. update league
+    ```
+    PUT /api/leagues/<id_league> HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    
+    {
+        "name": "league"
+    }
+    ```
+3. delete league
+    ```
+    DELETE /api/leagues/<id_league> HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    ```
+4. league list
+    ```
+    GET /api/leagues HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    ```
+5. league details
+    ```
+    GET /api/leagues/<id_league> HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    ```
+## Teams ##
+1. create Team
+    ```
+    POST /api/teams HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    
+    {
+        "name": "league11",
+        "id_league": 1,
+        "strip": "strip11",
+    }
+    ```
+2. update Team
+    ```
+    PUT /api/teams/<id_team> HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    
+    {
+        "name": "league11",
+        "id_league": 1,
+        "strip": "strip11",
+    }
+    ```
+3. delete team
+    ```
+    DELETE /api/teams/<id_team> HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    ```
+4. teams list
+    ```
+    GET /api/teams HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    ```
+5. team details
+    ```
+    GET /api/teams/<id_team> HTTP/1.1
+    Host: football
+    Content-Type: application/x-www-form-urlencoded
+    Authorization: Bearer <your JWT TOKEN>
+    ```
